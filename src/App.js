@@ -1,20 +1,52 @@
-import './app.css'
-import React, { useState } from 'react'
-import Counter from './Counter'
-
-
+import React from 'react'
+import axios from 'axios'
+import {useState} from 'react'
 function App() {
-  const [state,setState]=useState(false)
+  const [state,setState]=useState([])
   return (
-    <div className='app'>
-      <h1 onClick={()=>setState(!state)}>show/hide</h1>
-      {/* { state ? <Counter/> : null} */}
-      {state && <Counter/>}
+    <div className='App'>
+      <h1>hello world</h1>
+      <button onClick={()=>{
+        axios.get('https://jsonplaceholder.typicode.com/posts').then((response)=>{
+          console.log(response.data)
+          setState(response.data)
+        })
+      }}>click me</button>
+        {
+          state.map((obj,index)=>{
+            return (
+              <div>
+                <h1>{index}</h1>
+                <h4>{obj.title}</h4>
+              </div>
+            )
+          })
+        }
     </div>
   )
 }
 
 export default App
+
+
+
+// import './app.css'
+// import React, { useState } from 'react'
+// import Counter from './Counter'
+
+
+// function App() {
+//   const [state,setState]=useState(false)
+//   return (
+//     <div className='app'>
+//       <h1 onClick={()=>setState(!state)}>show/hide</h1>
+//       {/* { state ? <Counter/> : null} */}
+//       {state && <Counter/>}
+//     </div>
+//   )
+// }
+
+// export default App
 
 
 
